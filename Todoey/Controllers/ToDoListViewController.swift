@@ -21,22 +21,24 @@ class ToDoListViewController: UITableViewController {
         
         
         
-        let newItem = Item()
-        newItem.title = "Buy eggs"
-        itemArray.append(newItem)
-        
-        let newItem2 = Item()
-        newItem2.title = "Buy Spam"
-        itemArray.append(newItem2)
-        
-        let newItem3 = Item()
-        newItem3.title = "Profit"
-        itemArray.append(newItem3)
+//        let newItem = Item()
+//        newItem.title = "Buy eggs"
+//        itemArray.append(newItem)
+//        
+//        let newItem2 = Item()
+//        newItem2.title = "Buy Spam"
+//        itemArray.append(newItem2)
+//        
+//        let newItem3 = Item()
+//        newItem3.title = "Profit"
+//        itemArray.append(newItem3)
         
         //Lets us acces all of the items we have added to the list, even if we exit the app. 
-//        if let items = defaults.array(forKey: "TodoListArray") as? [Item] {
-//            itemArray = items
-//        }
+        //        if let items = defaults.array(forKey: "TodoListArray") as? [Item] {
+        //            itemArray = items
+        //        }
+        
+        loadItems()
         
         
         
@@ -126,7 +128,7 @@ class ToDoListViewController: UITableViewController {
         
     }
     
-//MARK: - Model Manipulation Methods
+    //MARK: - Model Manipulation Methods
     func saveItems() {
         let encoder = PropertyListEncoder()
         
@@ -141,6 +143,16 @@ class ToDoListViewController: UITableViewController {
         self.tableView.reloadData()
     }
     
+    func loadItems() {
+        if let data = try? Data(contentsOf: dataFilePath!) {
+            let decoder = PropertyListDecoder()
+            do {
+                itemArray = try decoder.decode([Item].self, from: data)
+            } catch {
+                print("Error decoding item array, \(error)")
+            }
+        }
+    }
 }
 
 
