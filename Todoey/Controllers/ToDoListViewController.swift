@@ -17,7 +17,7 @@ class ToDoListViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
+        //        print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
         
         loadItems()
     }
@@ -93,8 +93,9 @@ class ToDoListViewController: UITableViewController {
         self.tableView.reloadData()
     }
     
+    //=Item.fetchRequest() is our default value that lets you load without using our request/NSFetchRequest.
     func loadItems(with request: NSFetchRequest<Item> = Item.fetchRequest()) {
-
+        
         do {
             itemArray =  try context.fetch(request)
         } catch {
@@ -119,14 +120,21 @@ extension ToDoListViewController: UISearchBarDelegate {
         
         loadItems(with: request)
         
-//        do {
-//            itemArray =  try context.fetch(request)
-//        } catch {
-//            print ("Error fetching data from context \(error)")
-//        }
-        
         
     }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchBar.text?.count == 0 {
+            loadItems()
+            
+            DispatchQueue.main.async {
+                searchBar.resignFirstResponder()
+            }
+            
+        }
+    }
+    
+    
 }
 
 
