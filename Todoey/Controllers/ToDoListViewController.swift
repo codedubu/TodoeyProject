@@ -100,12 +100,15 @@ class ToDoListViewController: UITableViewController {
     }
     
     //=Item.fetchRequest() is our default value that lets you load without using our request/NSFetchRequest.
+    //predicate: NSPredicate? = nil allows us to load items without providing a predicate, IE: being able to load items in the viewdidload for the items.
     func loadItems(with request: NSFetchRequest<Item> = Item.fetchRequest(), predicate: NSPredicate? = nil) {
         
         let categoryPredicate = NSPredicate(format: "parentCategory.name MATCHES %@", selectedCategory!.name!)
         
+        //When the predicate is not nil.
         if let additionalPredicate = predicate {
             request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [categoryPredicate, additionalPredicate])
+            //When it's nil, then we keep the category predicate organized.
         } else {
             request.predicate = categoryPredicate
         }
