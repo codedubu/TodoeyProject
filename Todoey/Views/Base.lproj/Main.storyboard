@@ -60,7 +60,7 @@
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             <textInputTraits key="textInputTraits"/>
                             <connections>
-                                <outlet property="delegate" destination="Fl9-7Y-urJ" id="nEy-9n-4bH"/>
+                                <outlet property="delegate" destination="kLV-9r-9Kl" id="6H7-rs-oxY"/>
                             </connections>
                         </searchBar>
                         <prototypes>
@@ -86,6 +86,9 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="searchBar" destination="Fg5-7P-kSH" id="vQy-E7-zV7"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1nc-Xt-a1G" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
