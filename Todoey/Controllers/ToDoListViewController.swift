@@ -23,6 +23,7 @@ class ToDoListViewController: UITableViewController {
     }
     
     override func viewDidLoad() {
+    
         super.viewDidLoad()
         
         //        print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
@@ -74,7 +75,10 @@ class ToDoListViewController: UITableViewController {
             
             if let currentCategory = self.selectedCategory {
                 do {
-                    try self.realm.write {
+    
+                    try self.realm.write
+                    {
+                        
                         let newItem = Item()
                         newItem.title = textField.text!
                         newItem.dateCreated = Date()
@@ -85,6 +89,7 @@ class ToDoListViewController: UITableViewController {
                     print("Error saving new items, \(error)")
                 }
             }
+            
             self.tableView.reloadData()
         }
         
